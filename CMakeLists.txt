@@ -4,6 +4,8 @@ project(cp VERSION 0.1.0)
 include(CTest)
 enable_testing()
 
+add_definitions(-DI_AM_DEBUGGING)
+
 add_executable(cp main.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
