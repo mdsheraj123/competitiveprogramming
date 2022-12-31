@@ -2,7 +2,7 @@
 author: Mohammad Sheraj
 email: mdsheraj123@gmail.com
 //////////////
-CMake: Run Without Debugging
+CMake: Build (F7) for build and run.
 option+shift+F for VS Code indentation.
 Use long long instead of long always.
 printf("%.2lf", double_value);  // 4.00
