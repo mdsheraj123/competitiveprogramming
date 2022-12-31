@@ -3,6 +3,7 @@ author: Mohammad Sheraj
 email: mdsheraj123@gmail.com
 //////////////
 CMake: Build (F7) for build and run.
+CMake: Debug (Ctrl+F5) for debug.
 option+shift+F for VS Code indentation.
 Use long long instead of long always.
 printf("%.2lf", double_value);  // 4.00
@@ -92,10 +93,21 @@ main ()
   int n;
   cin >> n;
 
+  vector<vector<int> > arr;
+  vector<int> temp;
+  temp.push_back(1);
+  temp.push_back(2);
+  temp.push_back(3);
+
+
+  arr.push_back (temp);
+  arr.push_back (temp);
+
   for (int i = 0; i < n; i++) {
     int temp;
     cin >> temp;
     cout << temp << endl;
+    cout << arr[1][1] << endl;
   }
 
   return 0;
