@@ -1,5 +1,5 @@
-c++ version is 199711
-clang++ 14.0.0
+c++ version is 201402
+g++ 8.1.0
 1
 2
 2
@@ -10,4 +10,4 @@ clang++ 14.0.0
 2
 5
 2
-testing working
+testing working 11224
