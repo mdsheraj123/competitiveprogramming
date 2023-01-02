@@ -2,9 +2,6 @@
 author: Mohammad Sheraj
 email: mdsheraj123@gmail.com
 //////////////
-CMake: Run Without Debugging (Right Shift+Fn+F5) for build and run.
-CMake: Debug (Ctrl+Fn+F5) for debug.
-option+shift+F for VS Code indentation.
 Use long long instead of long always.
 printf("%.2lf", double_value);  // 4.00
 */
@@ -108,7 +105,7 @@ main ()
     cout << temp << endl;
     cout << arr[1][1] << endl;
   }
-  cout << "testing working 11224" << endl;
+  cout << "testing working 42" << endl;
 
   return 0;
 }
