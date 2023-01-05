@@ -1,17 +1,20 @@
 # competitiveprogramming
-Competitive Programming setup.
+Competitive Programming setup using CMake.
 
-Tested on Windows 10 and Intel Mac.
+Tested on Windows 10 and Intel Mac. Use VS Code.
 
-Use VS Code. Install
+Install<br/>
+https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack
+
+Ensure you have<br/>
 https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools
 
-Windows:
-CMake: Run Without Debugging (Shift+F5) for build and run.
-CMake: Debug (Ctrl+F5) for debug.
-Alt+Shift+F for VS Code indentation.
+**Windows:**<br/>
+CMake: Run Without Debugging (Shift+F5) for build and run.<br/>
+CMake: Debug (Ctrl+F5) for debug.<br/>
+Alt+Shift+F for VS Code indentation.<br/>
 
-Mac:
-CMake: Run Without Debugging (Right shift+fn+F5) for build and run.
-CMake: Debug (control+fn+F5) for debug.
-option+shift+F for VS Code indentation.
+**Mac:**<br/>
+CMake: Run Without Debugging (Right shift+fn+F5) for build and run.<br/>
+CMake: Debug (control+fn+F5) for debug.<br/>
+option+shift+F for VS Code indentation.<br/>
