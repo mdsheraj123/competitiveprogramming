@@ -1,5 +1,5 @@
 # competitiveprogramming
-Competitive Programming setup using CMake.
+C++17 Competitive Programming setup using CMake.
 
 Tested on Windows 10 and Intel Mac. Use VS Code.
 
