@@ -65,7 +65,7 @@ setup ()
   cout.tie (0);
 #ifdef I_AM_DEBUGGING
   freopen ("../input.txt", "r", stdin);
-  freopen ("../output.txt", "w", stdout);
+  // freopen ("../output.txt", "w", stdout);
   cout << "c++ version is " << __cplusplus << endl;
 #ifdef __clang__
   cout << "clang++ " << __clang_major__ << "." << __clang_minor__ << "." << __clang_patchlevel__ << endl;
@@ -82,30 +82,28 @@ int
 main ()
 {
   setup ();
-  // int T;
-  // cin >> T;
-  // for (int test_case = 1; test_case <= T; test_case++) {
-  // }
-
-  int n;
-  cin >> n;
-
-  vector<vector<int> > arr;
-  vector<int> temp;
-  temp.push_back (1);
-  temp.push_back (2);
-  temp.push_back (3);
-
-  arr.push_back (temp);
-  arr.push_back (temp);
-
-  for (int i = 0; i < n; i++) {
-    int temp;
-    cin >> temp;
-    cout << temp << endl;
-    cout << arr[1][1] << endl;
+  int T;
+  cin >> T;
+  for (int test_case = 1; test_case <= T; test_case++) {
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    bool isOne = s[0] == '1' ? true : false;
+    for (int i = 1; i < n; i++) {
+      if (s[i] == '1') {
+        if (isOne) {
+          cout << '-';
+          isOne = false;
+        } else {
+          cout << '+';
+          isOne = true;
+        }
+      } else {
+        cout << '+';
+      }
+    }
+    cout << endl;
   }
-  cout << "testing working 42" << endl;
-
   return 0;
 }
