@@ -63,7 +63,7 @@ void setup() {
     cout.tie(0);
 #ifdef I_AM_DEBUGGING
     freopen("../input.txt", "r", stdin);
-    // freopen ("../output.txt", "w", stdout);
+    freopen("../output.txt", "w", stdout);
     cout << "c++ version is " << __cplusplus << endl;
 #ifdef __clang__
     cout << "clang++ " << __clang_major__ << "." << __clang_minor__ << "." << __clang_patchlevel__ << endl;
@@ -76,7 +76,26 @@ void setup() {
 }
 ///////////////////////////////////////////////////////////////
 
-// addToStack(ordering, i, visited, output);
+void addToStack(vector<set<int>>& ordering, int at, vector<bool>& visited, stack<int>& output, set<int>& stackMemory, bool& impossible) {
+    if (impossible) {
+        return;
+    }
+
+    stackMemory.insert(at);
+
+    for (int element : ordering[at]) {
+        if (stackMemory.count(element)) {
+            impossible = true;
+        } else if (!visited[element]) {
+            addToStack(ordering, element, visited, output, stackMemory, impossible);
+        }
+    }
+
+    output.push(at);
+    visited[at] = true;
+
+    stackMemory.erase(at);
+}
 
 int main() {
     setup();
@@ -89,30 +108,51 @@ int main() {
     cin >> n;
 
     vector<string> name(n);
-
     for (int i = 0; i < n; i++) {
         cin >> name[i];
     }
 
-    vector<set<int>> ordering(26);
+    bool impossible = false;
 
+    vector<set<int>> ordering(26);
     for (int i = 1; i < n; i++) {
         int j = 0;
+        bool foundDiff = false;
         while (j < name[i].size() && j < name[i - 1].size()) {
             if (name[i][j] != name[i - 1][j]) {
                 ordering[name[i - 1][j] - 'a'].insert(name[i][j] - 'a');
+                foundDiff = true;
                 break;
             }
+            j++;
+        }
+        if (!foundDiff && name[i].size() < name[i - 1].size()) {
+            impossible = true;
         }
     }
 
-    vector<bool> visited(26, false);
-    stack<int> output;
+    if (!impossible) {
+        vector<bool> visited(26, false);
+        stack<int> output;
+        set<int> stackMemory;
 
-    for (int i = 0; i < 26; i++) {
-        if (!visited[i]) {
-            addToStack(ordering, i, visited, output);
+        for (int i = 0; i < 26; i++) {
+            if (!visited[i]) {
+                addToStack(ordering, i, visited, output, stackMemory, impossible);
+            }
         }
+
+        if (!impossible) {
+            while (!output.empty()) {
+                cout << (char)(output.top() + 'a');
+                output.pop();
+            }
+            cout << endl;
+        }
+    }
+
+    if (impossible) {
+        cout << "Impossible" << endl;
     }
 
     return 0;
