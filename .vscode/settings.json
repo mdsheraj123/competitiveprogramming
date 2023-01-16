@@ -4,6 +4,9 @@
     "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0 }",
     "files.associations": {
         "vector": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "tuple": "cpp",
+        "fstream": "cpp",
+        "*.tcc": "cpp"
     }
 }
