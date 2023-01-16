@@ -18,3 +18,7 @@ Alt+Shift+F for VS Code indentation.<br/>
 CMake: Run Without Debugging (Right shift+fn+F5) for build and run.<br/>
 CMake: Debug (control+fn+F5) for debug.<br/>
 option+shift+F for VS Code indentation.<br/>
+
+<hr />
+
+It is possible to run CTest via bottom navigation bar.
