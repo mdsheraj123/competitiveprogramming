@@ -82,7 +82,9 @@ int main() {
     // for (int test_case = 1; test_case <= T; test_case++) {
     // }
 
-    cout << 1 << endl;
+    int value;
+    cin >> value;
+    cout << value << endl;
 
     return 0;
 }

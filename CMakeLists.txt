@@ -8,10 +8,13 @@ add_definitions(-DI_AM_DEBUGGING)
 
 add_executable(cp main.cpp)
 
-# testing binary
-add_executable(cpCtest cpCtest.cpp)# define tests
+add_executable(cpCtest cpCtest.cpp)
 add_test(
-  NAME cpCtest
+  NAME PreTest
+  COMMAND $<TARGET_FILE:cp>
+  )
+add_test(
+  NAME ActualTest
   COMMAND $<TARGET_FILE:cpCtest>
   )
 
