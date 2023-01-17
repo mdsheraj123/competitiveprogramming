@@ -5,6 +5,7 @@ include(CTest)
 enable_testing()
 
 add_definitions(-DI_AM_DEBUGGING)
+add_definitions(-DOUTPUT_IN_FILE)
 
 add_executable(cp main.cpp)
 

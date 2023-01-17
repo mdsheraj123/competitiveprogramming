@@ -62,7 +62,9 @@ void setup() {
     cout.tie(0);
 #ifdef I_AM_DEBUGGING
     freopen("../input.txt", "r", stdin);
+#ifdef OUTPUT_IN_FILE
     freopen("../output.txt", "w", stdout);
+#else
     cout << "c++ version is " << __cplusplus << endl;
 #ifdef __clang__
     cout << "clang++ " << __clang_major__ << "." << __clang_minor__ << "." << __clang_patchlevel__ << endl;
@@ -70,6 +72,7 @@ void setup() {
     cout << "MSVC " << _MSC_VER << endl;
 #else
     cout << "g++ " << __GNUC__ << "." << __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__ << endl;
+#endif
 #endif
 #endif
 }
