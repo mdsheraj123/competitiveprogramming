@@ -44,6 +44,28 @@ printf("%.2lf", double_value);  // 4.00
 #define endl "\n"  // cout << "Line 1..." << flush; for interactive programs
 using namespace std;
 
+void setup(int argc, char *argv[]) {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+#ifdef I_AM_DEBUGGING
+    freopen("../input.txt", "r", stdin);
+    string inputFlag = argc > 1 ? argv[1] : "";
+    if (inputFlag == "OUTPUT_TO_FILE") {
+        freopen("../output.txt", "w", stdout);
+    } else {
+        cout << "c++ version is " << __cplusplus << endl;
+#ifdef __clang__
+        cout << "clang++ " << __clang_major__ << "." << __clang_minor__ << "." << __clang_patchlevel__ << endl;
+#elif _MSC_VER
+        cout << "MSVC " << _MSC_VER << endl;
+#else
+        cout << "g++ " << __GNUC__ << "." << __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__ << endl;
+#endif
+    }
+#endif
+}
+
 // struct comp {
 //     bool operator()(int a, int b) const {
 //         return a < b;  // true means a definitely before b
@@ -56,38 +78,43 @@ using namespace std;
 //     }
 // };
 
-void setup() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
-#ifdef I_AM_DEBUGGING
-    freopen("../input.txt", "r", stdin);
-#ifdef OUTPUT_IN_FILE
-    freopen("../output.txt", "w", stdout);
-#else
-    cout << "c++ version is " << __cplusplus << endl;
-#ifdef __clang__
-    cout << "clang++ " << __clang_major__ << "." << __clang_minor__ << "." << __clang_patchlevel__ << endl;
-#elif _MSC_VER
-    cout << "MSVC " << _MSC_VER << endl;
-#else
-    cout << "g++ " << __GNUC__ << "." << __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__ << endl;
-#endif
-#endif
-#endif
-}
 ///////////////////////////////////////////////////////////////
 
-int main() {
-    setup();
-    // int T;
-    // cin >> T;
-    // for (int test_case = 1; test_case <= T; test_case++) {
-    // }
+int main(int argc, char *argv[]) {
+    setup(argc, argv);
+    int T;
+    cin >> T;
+    for (int test_case = 1; test_case <= T; test_case++) {
+        string s;
+        cin >> s;
 
-    int value;
-    cin >> value;
-    cout << value << endl;
+        cout << "Case #" << test_case << ": ";
+
+        int count = 0;
+
+        for (int i = 0; i < s.size() - 1; i++) {
+            count++;
+            if (s[i] == s[i + 1]) {
+                ;
+            } else if (s[i] < s[i + 1]) {
+                for (int j = 0; j < 2 * count; j++) {
+                    cout << s[i];
+                }
+                count = 0;
+            } else {
+                for (int j = 0; j < count; j++) {
+                    cout << s[i];
+                }
+                count = 0;
+            }
+        }
+        count++;
+        for (int j = 0; j < count; j++) {
+            cout << s[s.size() - 1];
+        }
+        count = 0;
+        cout << endl;
+    }
 
     return 0;
 }

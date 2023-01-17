@@ -5,19 +5,19 @@ include(CTest)
 enable_testing()
 
 add_definitions(-DI_AM_DEBUGGING)
-add_definitions(-DOUTPUT_IN_FILE)
 
 add_executable(cp main.cpp)
 
 add_executable(cpCtest cpCtest.cpp)
 add_test(
-  NAME PreTest
-  COMMAND $<TARGET_FILE:cp>
+  NAME Test0
+  COMMAND $<TARGET_FILE:cp> OUTPUT_TO_FILE
   )
 add_test(
-  NAME ActualTest
+  NAME Test1
   COMMAND $<TARGET_FILE:cpCtest>
   )
+set_property(TEST Test1 APPEND PROPERTY DEPENDS Test0)
 
 target_compile_features(cp PRIVATE cxx_std_17)
 
