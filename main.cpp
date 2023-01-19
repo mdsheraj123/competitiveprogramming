@@ -4,6 +4,7 @@ author: a_natural
 Use long long instead of long always.
 printf("%.2lf", double_value);  // 4.00
 */
+// C:\Coding\competitiveprogramming>python interactive_runner.py python3 local_testing_tool.py 0 -- build/cp.exe
 ///////////////////////////////////////////////////////////////
 // #include <bits/stdc++.h>
 #include <assert.h>
@@ -41,10 +42,10 @@ printf("%.2lf", double_value);  // 4.00
 #include <unordered_set>
 #include <vector>
 
-#define endl "\n"  // cout << "Line 1..." << flush; for interactive programs
+// #define endl "\n"  // cout << "Line 1..." << flush; or default endl for interactive programs
 using namespace std;
 
-void setup(int argc, char *argv[]) {
+void setup(int argc, char* argv[]) {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
@@ -80,39 +81,73 @@ void setup(int argc, char *argv[]) {
 
 ///////////////////////////////////////////////////////////////
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     setup(argc, argv);
     int T;
     cin >> T;
     for (int test_case = 1; test_case <= T; test_case++) {
-        string s;
-        cin >> s;
+        int N;
+        cin >> N;
+        vector<int> binary;
+        unordered_set<int> mySet;
 
-        cout << "Case #" << test_case << ": ";
-
-        int count = 0;
-
-        for (int i = 0; i < s.size() - 1; i++) {
-            count++;
-            if (s[i] == s[i + 1]) {
-                ;
-            } else if (s[i] < s[i + 1]) {
-                for (int j = 0; j < 2 * count; j++) {
-                    cout << s[i];
-                }
-                count = 0;
+        for (int i = 0;; i++) {
+            long long temp = pow(2, i);
+            if (temp > 1000000000) {
+                break;
             } else {
-                for (int j = 0; j < count; j++) {
-                    cout << s[i];
-                }
-                count = 0;
+                mySet.insert(temp);
+                binary.push_back(temp);
+                cout << temp << " ";
             }
         }
-        count++;
-        for (int j = 0; j < count; j++) {
-            cout << s[s.size() - 1];
+
+        vector<int> regular;
+        int left = 1;
+        for (int i = binary.size(); i < N; i++) {
+            while (mySet.count(left) != 0) {
+                left++;
+            }
+            mySet.insert(left);
+            regular.push_back(left);
+            cout << left << " ";
         }
-        count = 0;
+        cout << endl;
+
+        vector<int> input(N);
+        for (int i = 0; i < N; i++) {
+            cin >> input[i];
+        }
+
+        int more = 0;
+
+        for (int i = 0; i < N; i++) {
+            if (more <= 0) {
+                cout << input[i] << " ";
+                more += input[i];
+            } else {
+                more -= input[i];
+            }
+        }
+
+        for (int i = 0; i < regular.size(); i++) {
+            if (more <= 0) {
+                cout << regular[i] << " ";
+                more += regular[i];
+            } else {
+                more -= regular[i];
+            }
+        }
+
+        for (int i = binary.size() - 1; i >= 0; i--) {
+            if (more <= 0) {
+                cout << binary[i] << " ";
+                more += binary[i];
+            } else {
+                more -= binary[i];
+            }
+        }
+
         cout << endl;
     }
 

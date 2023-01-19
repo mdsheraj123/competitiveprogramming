@@ -7,6 +7,13 @@
         "iterator": "cpp",
         "tuple": "cpp",
         "fstream": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "sstream": "cpp",
+        "type_traits": "cpp",
+        "ostream": "cpp",
+        "cmath": "cpp"
     }
 }
