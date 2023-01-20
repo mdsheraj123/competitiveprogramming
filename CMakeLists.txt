@@ -9,7 +9,7 @@ enable_testing()
 
 add_executable(cp main.cpp)
 
-add_executable(cpCtest cpCtest.cpp)
+add_executable(cpCtest testing/cpCtest.cpp)
 add_test(
   NAME Test0
   COMMAND $<TARGET_FILE:cp> OUTPUT_TO_FILE
