@@ -5,7 +5,7 @@ include(CTest)
 enable_testing()
 
 # Comment this for binary outputs
-# add_definitions(-DI_AM_DEBUGGING)
+add_definitions(-DI_AM_DEBUGGING)
 
 add_executable(cp main.cpp)
 

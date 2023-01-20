@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    ifstream expectedOutput("expectedOutput.txt");
+    ifstream expectedOutput("../testing/expectedOutput.txt");
     ifstream output("../output.txt");
 
     int result = 0;
