@@ -42,7 +42,6 @@ printf("%.2lf", double_value);  // 4.00
 #include <vector>
 
 // #define endl "\n"  // cout << "Line 1..." << flush; or default endl for interactive programs
-// C:\Coding\competitiveprogramming>python interactive/interactive_runner.py python3 interactive/local_testing_tool.py 0 -- build/cp.exe
 using namespace std;
 
 void setup(int argc, char* argv[]) {

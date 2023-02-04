@@ -22,3 +22,8 @@ option+shift+F for VS Code indentation.<br/>
 <hr />
 
 It is possible to run CTest via bottom navigation bar.
+
+<hr />
+
+For interactive tests of Google Code Jam, run on terminal<br/>
+C:\Coding\competitiveprogramming\CMake>python interactive/interactive_runner.py python3 interactive/local_testing_tool.py 0 -- build/cp.exe
