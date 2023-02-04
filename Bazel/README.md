@@ -1,3 +1,6 @@
+set BAZEL_VC=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC
+
+
 # Stage 1
 
 This showcases how to build a single file to create a runnable application.
