@@ -11,6 +11,8 @@ https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools
 Ensure you have cmake installed on your system. On mac try<br/>
 brew install cmake<br/>
 
+On VSCode open this CMake folder directly or else the folder structure will be incorrect.<br/>
+
 **Windows:**<br/>
 CMake: Run Without Debugging (Shift+F5) for build and run.<br/>
 CMake: Debug (Ctrl+F5) for debug.<br/>
