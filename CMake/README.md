@@ -16,12 +16,12 @@ On VSCode open this CMake folder directly or else the folder structure will be i
 **Windows:**<br/>
 CMake: Run Without Debugging (Shift+F5) for build and run.<br/>
 CMake: Debug (Ctrl+F5) for debug.<br/>
-Alt+Shift+F for VS Code indentation.<br/>
+To format a selection: Ctrl+A, Ctrl+K, Ctrl+F<br/>
 
 **Mac:**<br/>
 CMake: Run Without Debugging (Right shift+fn+F5) for build and run.<br/>
 CMake: Debug (control+fn+F5) for debug.<br/>
-option+shift+F for VS Code indentation.<br/>
+To format a selection: CMD ⌘+A, CMD ⌘+K, CMD ⌘+F<br/>
 
 <hr />
 
