@@ -4,10 +4,12 @@ C++17 Competitive Programming setup using CMake.
 Tested on Windows 10 and Intel Mac. Use VS Code.
 
 Install<br/>
-https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack
-
-Ensure you have<br/>
+https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack<br/>
+Which should also include<br/>
 https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools
+
+Ensure you have cmake installed on your system. On mac try<br/>
+brew install cmake<br/>
 
 **Windows:**<br/>
 CMake: Run Without Debugging (Shift+F5) for build and run.<br/>
