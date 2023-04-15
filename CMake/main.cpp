@@ -41,7 +41,7 @@ printf("%.2lf", double_value);  // 4.00
 #include <unordered_set>
 #include <vector>
 
-// #define endl "\n"  // cout << "Line 1..." << flush; or default endl for interactive programs
+#define endl "\n"  // cout << "Line 1..." << flush; or default endl for interactive programs
 using namespace std;
 
 void setup(int argc, char* argv[]) {
@@ -85,9 +85,32 @@ int main(int argc, char* argv[]) {
     int T;
     cin >> T;
     for (int test_case = 1; test_case <= T; test_case++) {
-        int n;
-        cin >> n;
-        cout << n << endl;
+        vector<char> Cmap(26);
+        for (int i = 0; i < 26; i++) {
+            cin >> Cmap[i];
+        }
+        int N;
+        cin >> N;
+        unordered_set<string> Nset;
+        Nset.clear();
+        bool coincide = false;
+        for (int i = 0; i < N; i++) {
+            string s;
+            cin >> s;
+            for (int j = 0; j < s.size(); j++) {
+                s[j] = Cmap[s[j] - 'A'];
+            }
+            if (Nset.count(s)) {
+                coincide = true;
+            } else {
+                Nset.insert(s);
+            }
+        }
+        if (coincide) {
+            cout << "Case #" << test_case << ": YES" << endl;
+        } else {
+            cout << "Case #" << test_case << ": NO" << endl;
+        }
     }
 
     return 0;
