@@ -82,36 +82,24 @@ void setup(int argc, char* argv[]) {
 
 int main(int argc, char* argv[]) {
     setup(argc, argv);
-    int T;
-    cin >> T;
-    for (int test_case = 1; test_case <= T; test_case++) {
-        vector<char> Cmap(26);
-        for (int i = 0; i < 26; i++) {
-            cin >> Cmap[i];
-        }
-        int N;
-        cin >> N;
-        unordered_set<string> Nset;
-        Nset.clear();
-        bool coincide = false;
-        for (int i = 0; i < N; i++) {
-            string s;
-            cin >> s;
-            for (int j = 0; j < s.size(); j++) {
-                s[j] = Cmap[s[j] - 'A'];
-            }
-            if (Nset.count(s)) {
-                coincide = true;
-            } else {
-                Nset.insert(s);
-            }
-        }
-        if (coincide) {
-            cout << "Case #" << test_case << ": YES" << endl;
-        } else {
-            cout << "Case #" << test_case << ": NO" << endl;
-        }
+    // int T;
+    // cin >> T;
+    // for (int test_case = 1; test_case <= T; test_case++) {
+    // }
+
+    int n,k;
+    cin>>n>>k;
+
+    for (int i=0;i<n;i++) {
     }
 
     return 0;
 }
+
+
+/*
+Notes:
+
+
+
+*/
