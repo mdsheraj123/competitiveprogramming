@@ -80,6 +80,15 @@ void setup(int argc, char* argv[]) {
 
 ///////////////////////////////////////////////////////////////
 
+
+/*
+Notes:
+
+
+
+*/
+
+
 int main(int argc, char* argv[]) {
     setup(argc, argv);
     // int T;
@@ -87,144 +96,8 @@ int main(int argc, char* argv[]) {
     // for (int test_case = 1; test_case <= T; test_case++) {
     // }
 
-    int n, k;
-    cin >> n >> k;
-
-    priority_queue<int, vector<int>, greater<int>> minHeapBoth, minHeapA, minHeapB;
-
-    for (int i = 0; i < n; i++) {
-        int t, a, b;
-        cin >> t >> a >> b;
-
-        if (a && b) {
-            minHeapBoth.push(t);
-        } else if (a) {
-            minHeapA.push(t);
-        } else if (b) {
-            minHeapB.push(t);
-        }
-    }
-
-    int aLeft = k, bLeft = k;
-
-    int answer = 0;
-    bool possible = true;
-
-    while (possible && (aLeft || bLeft)) {
-
-        if (aLeft && bLeft) {
-            if (!minHeapBoth.empty()) {
-                if (!minHeapA.empty() && !minHeapB.empty()) {
-                    if (minHeapBoth.top() < minHeapA.top() + minHeapB.top()) {
-                        answer += minHeapBoth.top();
-                        minHeapBoth.pop();
-                        aLeft--;
-                        bLeft--;
-                    } else {
-                        answer += (minHeapA.top() + minHeapB.top());
-                        minHeapA.pop();
-                        minHeapB.pop();
-                        aLeft--;
-                        bLeft--;
-                    }
-                } else {
-                    answer += minHeapBoth.top();
-                    minHeapBoth.pop();
-                    aLeft--;
-                    bLeft--;
-                }
-            } else {
-                if (!minHeapA.empty() && !minHeapB.empty()) {
-                    answer += (minHeapA.top() + minHeapB.top());
-                    minHeapA.pop();
-                    minHeapB.pop();
-                    aLeft--;
-                    bLeft--;
-                } else {
-                    possible = false;
-                    break;
-                }
-            }
-
-        } else if (aLeft) {
-
-            if(!minHeapBoth.empty()) {
-                if(!minHeapA.empty()) {
-                    if (minHeapBoth.top() < minHeapA.top()) {
-                        answer += minHeapBoth.top();
-                        aLeft--;
-                        minHeapBoth.pop();
-                    } else {
-                        answer += minHeapA.top();
-                        aLeft--;
-                        minHeapA.pop();
-                    }
-                } else {
-                    answer += minHeapBoth.top();
-                    aLeft--;
-                    minHeapBoth.pop();
-                }
-            } else {
-                if(!minHeapA.empty()) {
-                    answer += minHeapA.top();
-                    aLeft--;
-                    minHeapA.pop();
-                } else {
-                    possible = false;
-                    break;
-                }
-            }
-
-        } else if (bLeft) {
 
 
-            if(!minHeapBoth.empty()) {
-                if(!minHeapB.empty()) {
-                    if (minHeapBoth.top() < minHeapB.top()) {
-                        answer += minHeapBoth.top();
-                        aLeft--;
-                        minHeapBoth.pop();
-                    } else {
-                        answer += minHeapB.top();
-                        aLeft--;
-                        minHeapB.pop();
-                    }
-                } else {
-                    answer += minHeapBoth.top();
-                    aLeft--;
-                    minHeapBoth.pop();
-                }
-            } else {
-                if(!minHeapB.empty()) {
-                    answer += minHeapB.top();
-                    aLeft--;
-                    minHeapB.pop();
-                } else {
-                    possible = false;
-                    break;
-                }
-            }
-
-        }
-    }
-
-    if (possible) {
-        cout << answer << endl;
-    } else {
-        cout << -1 << endl;
-    }
-
+    
     return 0;
 }
-
-/*
-Notes:
-
-
-n books take k of each
-
-answer (n,k)
-
-
-
-*/
