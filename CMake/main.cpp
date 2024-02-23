@@ -20,7 +20,7 @@ printf("%.2lf", double_value);  // 4.00
 #include <climits>    //INT_MIN //LLONG_MAX
 #include <condition_variable>
 #include <cstdlib>  //rand() //srand()
-#include <cstring>  //provides functions for dealing with C-style strings — null-terminated arrays of characters.
+#include <cstring>  //provides functions for dealing with C-style strings. It creates null-terminated arrays of characters.
 #include <deque>
 #include <fstream>  //fstream fio("sample.txt",ios::trunc|ios::out|ios::in);fio<<line;getline(fio,line);fio.close();
 #include <functional>
@@ -89,12 +89,74 @@ Notes:
 
 int main(int argc, char* argv[]) {
     setup(argc, argv);
-    // int T;
-    // cin >> T;
-    // for (int test_case = 1; test_case <= T; test_case++) {
-    // }
+    int T;
+    cin >> T;
+    for (int test_case = 1; test_case <= T; test_case++) {
+        int n;
+        long long k;
+        cin>>n>>k;
+        vector<long long> a(n), x(n);
+        for(int i=0;i<n;i++) {
+            cin>>a[i];
+        }
+        for(int i=0;i<n;i++) {
+            cin>>x[i];
+        }
+        long long bulletsUsed = 0;
+        int positive = lower_bound(x.begin(),x.end(),0)-x.begin(); // x != 0
+        int negative = positive-1;
 
-    cout << "OK" << endl;
+        bool possible = true;
+
+        while(possible) {
+
+            bool positivePossible = true;
+            bool negativePossible = true;
+
+            if(positive>=x.size()) {
+                positivePossible = false;
+            }
+            if(negative<0) {
+                negativePossible = false;
+            }
+
+            if(positivePossible && negativePossible) {
+                if(x[positive] <= -x[negative]) {
+                    if(k*x[positive]-bulletsUsed<a[positive]) {
+                        possible = false;
+                    }
+                    bulletsUsed+=a[positive];
+                    positive++;
+                } else {
+                    if(-k*x[negative]-bulletsUsed<a[negative]) {
+                        possible = false;
+                    }
+                    bulletsUsed+=a[negative];
+                    negative--;
+                }
+            } else if(positivePossible) {
+                    if(k*x[positive]-bulletsUsed<a[positive]) {
+                        possible = false;
+                    }
+                    bulletsUsed+=a[positive];
+                    positive++;
+            } else if(negativePossible) {
+                    if(-k*x[negative]-bulletsUsed<a[negative]) {
+                        possible = false;
+                    }
+                    bulletsUsed+=a[negative];
+                    negative--;
+            } else {
+                break;
+            }
+        }
+        if(possible) {
+            cout<<"YES"<<endl;
+        } else {
+            cout<<"NO"<<endl;
+        }
+    }
+
 
     return 0;
 }
