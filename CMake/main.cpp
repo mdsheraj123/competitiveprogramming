@@ -63,11 +63,13 @@ void setup(int argc, char* argv[]) {
     } else {
         cout << "c++ version is " << __cplusplus << endl;
 #ifdef __clang__
-        cout << "clang++ " << __clang_major__ << "." << __clang_minor__ << "." << __clang_patchlevel__ << endl;
+        cout << "clang++ " << __clang_major__ << "." << __clang_minor__ << ".";
+        cout << __clang_patchlevel__ << endl;
 #elif _MSC_VER
         cout << "MSVC " << _MSC_VER << endl;
 #else
-        cout << "g++ " << __GNUC__ << "." << __GNUC_MINOR__ << "." << __GNUC_PATCHLEVEL__ << endl;
+        cout << "g++ " << __GNUC__ << "." << __GNUC_MINOR__ << ".";
+        cout << __GNUC_PATCHLEVEL__ << endl;
 #endif
     }
 #endif
