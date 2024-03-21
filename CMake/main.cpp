@@ -75,15 +75,20 @@ void setup(int argc, char* argv[]) {
 #endif
 }
 
+// For map like
+// map<int, int, cmp> myMap;
 // struct comp {
 //     bool operator()(int a, int b) const {
 //         return a < b;  // true means a definitely before b
 //     }
 // };
 
+// For unordered_map like
+// std::unordered_map<tuple<int, int>, int, customHash> myMap;
 // struct customHash {
-//     size_t operator()(tuple<int, int> a) const {
-//         return 100;
+//     size_t operator()(const tuple<int, int>& a) const {
+//         // max value of second element is 99.
+//         return get<0>(a)*100+get<1>(a);
 //     }
 // };
 
