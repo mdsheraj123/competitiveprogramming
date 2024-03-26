@@ -99,6 +99,151 @@ NOTES:
 */
 ///////////////////////////////////////////////////////////////
 
+class Vehicle {
+   public:
+    Vehicle(int id, int numberOfWheels) {
+        mId = id;
+        mNumberOfWheels = numberOfWheels;
+    }
+    int getNumberOfWheels() {
+        return mNumberOfWheels;
+    }
+    int getId() {
+        return mId;
+    }
+
+   private:
+    int mNumberOfWheels;
+    int mId;
+};
+
+class TwoWheeler : Vehicle {
+   public:
+    TwoWheeler(int id, int numberOfWheels) : Vehicle(id, 2) {
+    }
+
+   private:
+};
+
+class FourWheeler : Vehicle {
+   public:
+    FourWheeler(int id, int numberOfWheels) : Vehicle(id, 4) {
+    }
+    void setCng(bool isCng) {
+        mIsCng = isCng;
+    }
+    bool getCng() {
+        return mIsCng;
+    }
+
+   private:
+    bool mIsCng;
+};
+
+class ParkingSpace {
+   public:
+    ParkingSpace(int id, int capacity) {
+        mId = id;
+        mCapacity = capacity;
+    }
+
+    int getId() {
+        return mId;
+    }
+
+    int getCapacity() {
+        return mCapacity;
+    }
+
+   private:
+    int mId;
+    int mCapacity;
+};
+
+class ParkingLot {
+   public:
+    ParkingLot(int id) {
+        mId = id;
+    }
+
+    void addParkingSpace(ParkingSpace* parkingSpace) {
+        int parkingSpaceId = parkingSpace->getId();
+        mParkingSpace[parkingSpaceId] = parkingSpace;
+        mAvailableParking[mParkingSpace[parkingSpaceId]->getCapacity()].insert(parkingSpaceId);
+    }
+
+    void park(Vehicle* parkingVehicle) {
+        int parkingVehicleId = parkingVehicle->getId();
+        int neededCapacity = parkingVehicle->getNumberOfWheels() / 2;
+
+        mParkingVehicles[parkingVehicleId] = parkingVehicle;
+
+        if (neededCapacity == 1 && mAvailableParking.count(1) != 0) {
+            int parkingSpaceId = *mAvailableParking[1].begin();
+            mAvailableParking[1].erase(parkingSpaceId);
+            if (mAvailableParking[1].size() == 0) {
+                mAvailableParking.erase(1);
+            }
+
+            mVehicleParkingLocation[parkingVehicleId] = parkingSpaceId;
+        } else {
+            if (mAvailableParking.count(2) != 0) {
+                int parkingSpaceId = *mAvailableParking[2].begin();
+                mAvailableParking[2].erase(parkingSpaceId);
+
+                if (neededCapacity == 1) {
+                    mAvailableParking[1].insert(parkingSpaceId);
+                }
+
+                if (mAvailableParking[2].size() == 0) {
+                    mAvailableParking.erase(2);
+                }
+
+                mVehicleParkingLocation[parkingVehicleId] = parkingSpaceId;
+            } else {
+                cout << "Error" << endl;
+            }
+        }
+    }
+
+    void removeVehicle(int id) {
+        int vehicleParkingLocation = mVehicleParkingLocation[id];
+        int neededSpace = mParkingVehicles[id]->getNumberOfWheels() / 2;
+
+        if (neededSpace == 1) {
+            if (mAvailableParking[1].count(vehicleParkingLocation) != 0) {
+                mAvailableParking[1].erase(vehicleParkingLocation);
+                mAvailableParking[2].insert(vehicleParkingLocation);
+            } else {
+                mAvailableParking[1].insert(vehicleParkingLocation);
+            }
+        } else {
+            mAvailableParking[2].insert(vehicleParkingLocation);
+        }
+
+        mVehicleParkingLocation.erase(id);
+        delete mParkingVehicles[id];
+        mParkingVehicles.erase(id);
+    }
+
+    void printParkingSpaceAndParkedVehicles() {
+        cout << "Vehicle id to parking id" << endl;
+        for (auto itr = mVehicleParkingLocation.begin(); itr != mVehicleParkingLocation.end(); itr++) {
+            cout << itr->first << " " << itr->second << endl;
+        }
+    }
+
+   private:
+    int mId;
+    // Data and state are seperated
+    unordered_map<int, Vehicle*> mParkingVehicles;    // id to instance
+    unordered_map<int, ParkingSpace*> mParkingSpace;  // id to instance
+    // available capacity to id
+    unordered_map<int, set<int>> mAvailableParking;
+    // Vehicle id to parking id
+    unordered_map<int, int> mVehicleParkingLocation;
+};
+
 int main(int argc, char* argv[]) {
     setup(argc, argv);
     // int T;
@@ -106,5 +251,34 @@ int main(int argc, char* argv[]) {
     // for (int test_case = 1; test_case <= T; test_case++) {
     // }
 
+    ParkingLot* myParkingLot = new ParkingLot(1);
+    ParkingSpace* parkingSpace1 = new ParkingSpace(1, 2);
+    ParkingSpace* parkingSpace2 = new ParkingSpace(2, 1);
+
+    myParkingLot->addParkingSpace(parkingSpace1);
+    myParkingLot->addParkingSpace(parkingSpace2);
+
+    TwoWheeler* bike1 = new TwoWheeler(1, 2);
+    myParkingLot->park((Vehicle*)bike1);
+    myParkingLot->printParkingSpaceAndParkedVehicles();
+
+    TwoWheeler* bike2 = new TwoWheeler(2, 2);
+    myParkingLot->park((Vehicle*)bike2);
+    myParkingLot->printParkingSpaceAndParkedVehicles();
+
+    TwoWheeler* bike3 = new TwoWheeler(3, 2);
+    myParkingLot->park((Vehicle*)bike3);
+    myParkingLot->printParkingSpaceAndParkedVehicles();
+
+    myParkingLot->removeVehicle(1);
+    myParkingLot->printParkingSpaceAndParkedVehicles();
+
+    TwoWheeler* bike4 = new TwoWheeler(4, 2);
+    myParkingLot->park((Vehicle*)bike4);
+    myParkingLot->printParkingSpaceAndParkedVehicles();
+
+    TwoWheeler* bike5 = new TwoWheeler(5, 2);
+    myParkingLot->park((Vehicle*)bike5);
+    myParkingLot->printParkingSpaceAndParkedVehicles();
     return 0;
 }
