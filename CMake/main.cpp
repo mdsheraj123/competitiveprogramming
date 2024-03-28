@@ -119,6 +119,9 @@ int main(int argc, char* argv[]) {
             printf("%02d", hour);
             cout << ":" << s[3] << s[4] << " PM" << endl;
         } else {
+            if (hour == 0) {
+                hour = 12;
+            }
             printf("%02d", hour);
             cout << ":" << s[3] << s[4] << " AM" << endl;
         }
