@@ -96,34 +96,76 @@ NOTES:
 */
 ///////////////////////////////////////////////////////////////
 
+
+unordered_map<int,bool> possible;
+unordered_map<int,int> base10Map;
+
+
+
+// make unordered_map
+int getBase10(int test) {
+    int factor = 1;
+    int output = 0;
+    while(test!=0) {
+        if(test&1) {
+            output+=factor;
+        }
+        test = test>>1;
+        factor*=10;
+    }
+    return output;
+}
+
+bool isPossible(int n) {
+
+    if(possible.count(n)==0) {
+        possible[n] = false;
+
+        int test = 1;
+
+        while(true) {
+
+            if(base10Map.count(test)==0) {
+                base10Map[test] = getBase10(test);
+            }
+
+            if(base10Map[test]>n) {
+                break;
+            }
+
+            if(n%base10Map[test]==0 && isPossible(n/base10Map[test])) {
+                possible[n] = true;
+                break;
+            }
+
+            test++;
+        }
+
+    }
+
+    return possible[n];
+}
+
 int main(int argc, char* argv[]) {
-    // ios_base::sync_with_stdio(0);
-    // cin.tie(0);
-    // cout.tie(0);
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
     setup(argc, argv);
+    ////////////////////////////////////////
+
+
+    possible[1] = true;
 
     int T;
     cin >> T;
     for (int test_case = 1; test_case <= T; test_case++) {
-        string s;
-        cin >> s;
+        int n;
+        cin>>n;
 
-        int hour = stoi(s.substr(0, 2));
-
-        if (hour >= 12) {
-            hour -= 12;
-            if (hour == 0) {
-                hour = 12;
-            }
-
-            printf("%02d", hour);
-            cout << ":" << s[3] << s[4] << " PM" << endl;
+        if(isPossible(n)) {
+            cout<<"YES"<<endl;
         } else {
-            if (hour == 0) {
-                hour = 12;
-            }
-            printf("%02d", hour);
-            cout << ":" << s[3] << s[4] << " AM" << endl;
+            cout<<"NO"<<endl;
         }
     }
 
