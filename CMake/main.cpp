@@ -52,9 +52,6 @@ printf("%.2lf", double_value);  // 4.00
 using namespace std;
 
 void setup(int argc, char* argv[]) {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
 #ifdef I_AM_DEBUGGING
     freopen("../input.txt", "r", stdin);
     string inputFlag = argc > 1 ? argv[1] : "";
@@ -100,11 +97,32 @@ NOTES:
 ///////////////////////////////////////////////////////////////
 
 int main(int argc, char* argv[]) {
+    // ios_base::sync_with_stdio(0);
+    // cin.tie(0);
+    // cout.tie(0);
     setup(argc, argv);
-    // int T;
-    // cin >> T;
-    // for (int test_case = 1; test_case <= T; test_case++) {
-    // }
-    
+
+    int T;
+    cin >> T;
+    for (int test_case = 1; test_case <= T; test_case++) {
+        string s;
+        cin >> s;
+
+        int hour = stoi(s.substr(0, 2));
+
+        if (hour >= 12) {
+            hour -= 12;
+            if (hour == 0) {
+                hour = 12;
+            }
+
+            printf("%02d", hour);
+            cout << ":" << s[3] << s[4] << " PM" << endl;
+        } else {
+            printf("%02d", hour);
+            cout << ":" << s[3] << s[4] << " AM" << endl;
+        }
+    }
+
     return 0;
 }
