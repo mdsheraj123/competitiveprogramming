@@ -97,55 +97,6 @@ NOTES:
 ///////////////////////////////////////////////////////////////
 
 
-unordered_map<int,bool> possible;
-unordered_map<int,int> base10Map;
-
-
-
-// make unordered_map
-int getBase10(int test) {
-    int factor = 1;
-    int output = 0;
-    while(test!=0) {
-        if(test&1) {
-            output+=factor;
-        }
-        test = test>>1;
-        factor*=10;
-    }
-    return output;
-}
-
-bool isPossible(int n) {
-
-    if(possible.count(n)==0) {
-        possible[n] = false;
-
-        int test = 1;
-
-        while(true) {
-
-            if(base10Map.count(test)==0) {
-                base10Map[test] = getBase10(test);
-            }
-
-            if(base10Map[test]>n) {
-                break;
-            }
-
-            if(n%base10Map[test]==0 && isPossible(n/base10Map[test])) {
-                possible[n] = true;
-                break;
-            }
-
-            test++;
-        }
-
-    }
-
-    return possible[n];
-}
-
 int main(int argc, char* argv[]) {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -153,20 +104,62 @@ int main(int argc, char* argv[]) {
     setup(argc, argv);
     ////////////////////////////////////////
 
-
-    possible[1] = true;
+    vector<int> powersOf2(31);
+    powersOf2[0] = 1;
+    powersOf2[1] = 2;
+    for(int i=2;i<30;i++) {
+        powersOf2[i] = powersOf2[i-1]*2;
+    }
 
     int T;
     cin >> T;
     for (int test_case = 1; test_case <= T; test_case++) {
-        int n;
-        cin>>n;
+        int a,b,c;
+        cin>>a>>b>>c;
 
-        if(isPossible(n)) {
-            cout<<"YES"<<endl;
+        int leafNodes = 1;
+
+        leafNodes+=a;
+
+        if(leafNodes!=c) {
+            cout<<-1<<endl;
         } else {
-            cout<<"NO"<<endl;
+            // cout<<"Maybe possible"<<endl;
+
+            if(a==0) {
+                cout<<b<<endl;
+                continue;
+            }
+
+            int power = -1;
+            for(int i=29;i>=0;i--) {
+                if(a>=powersOf2[i]) {
+                    power = i;
+                    break;
+                }
+            }
+
+            int answer = power+1;
+
+            int additional = a - (powersOf2[power]-1);
+
+            int sameLevelSpaces = powersOf2[power] - additional;
+
+            int nextLevelSpace = 2*additional+sameLevelSpaces;
+
+
+            b-=sameLevelSpaces;
+
+            while(b>0) {
+                b-=nextLevelSpace;
+                answer++;
+            }
+
+            cout<<answer<<endl;
         }
+
+
+
     }
 
     return 0;
